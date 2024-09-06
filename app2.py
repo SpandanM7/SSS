@@ -1,3 +1,20 @@
+import gdown
+import torch
+import os
+# Define file URL and destination path
+url = 'https://drive.google.com/uc?id=1T-pa-QDVTuJ4okVBqwQLE5f2dwQBgGkp'
+output = 'generator_epoch11.pth'
+
+# Download the model
+if not os.path.exists(output):
+    gdown.download(url, output, quiet=False)
+
+
+
+
+
+
+
 import streamlit as st
 from PIL import Image
 import torch
@@ -70,7 +87,7 @@ def main_network(image):
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     generator = UNetGenerator(in_channels=1, out_channels=3).to(device)
-    generator.load_state_dict(torch.load('generator_epoch.pth', map_location=device))
+    generator.load_state_dict(torch.load('generator_epoch11.pth', map_location=device))
 
     generator.eval()
 
